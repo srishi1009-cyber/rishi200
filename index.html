@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <meta name="theme-color" content="#071a3d">
+    <meta name="background-color" content="#020713">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent">
+
+    <title>Rishi Music</title>
+
+
+    <!-- =========================================
+         PWA MANIFEST
+    ========================================== -->
+
+    <link rel="manifest"
+          href="./manifest.json">
+
+
+    <!-- =========================================
+         APP ICON
+    ========================================== -->
+
+    <link rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href="./icon-192.png">
+
+    <link rel="apple-touch-icon"
+          href="./icon-192.png">
+
+
+    <!-- =========================================
+         STYLESHEET
+    ========================================== -->
+
+    <link rel="stylesheet"
+          href="./style.css">
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <div class="brand">
+                RISHI MUSIC
+            </div>
+
+            <div class="subtitle">
+                Personal Offline Audio Station
+            </div>
+
+        </div>
+
+
+        <button id="installBtn"
+                class="install-btn"
+                hidden>
+
+            INSTALL
+
+        </button>
+
+    </header>
+
+
+    <!-- =========================================
+         NAVIGATION
+    ========================================== -->
+
+    <nav class="navigation">
+
+        <button class="nav-btn active"
+                data-page="home">
+
+            🏠
+            <span>Home</span>
+
+        </button>
+
+
+        <button class="nav-btn"
+                data-page="library">
+
+            🎵
+            <span>Library</span>
+
+        </button>
+
+
+        <button class="nav-btn"
+                data-page="directors">
+
+            🎼
+            <span>Directors</span>
+
+        </button>
+
+
+        <button class="nav-btn"
+                data-page="favorites">
+
+            ❤️
+            <span>Favorites</span>
+
+        </button>
+
+
+        <button class="nav-btn"
+                data-page="playlists">
+
+            📋
+            <span>Playlists</span>
+
+        </button>
+
+    </nav>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main>
+
+
+        <!-- =====================================
+             HOME
+        ====================================== -->
+
+        <section id="homePage"
+                 class="page active">
+
+
+            <div class="hero-card">
+
+                <div class="hero-glow"></div>
+
+                <div class="hero-title">
+                    RISHI MUSIC
+                </div>
+
+                <div class="hero-text">
+                    Your music. Your library. Your device.
+                </div>
+
+
+                <div class="stats">
+
+
+                    <div class="stat-card">
+
+                        <strong id="totalSongs">
+                            0
+                        </strong>
+
+                        <span>
+                            Songs
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <strong id="totalDirectors">
+                            0
+                        </strong>
+
+                        <span>
+                            Directors
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <strong id="favoriteCount">
+                            0
+                        </strong>
+
+                        <span>
+                            Favorites
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="section-title">
+                QUICK ACTIONS
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <button id="importButton"
+                        class="big-action">
+
+                    <span>➕</span>
+
+                    <strong>
+                        IMPORT MUSIC
+                    </strong>
+
+                    <small>
+                        Add songs permanently to Rishi Music
+                    </small>
+
+                </button>
+
+
+                <button id="folderButton"
+                        class="big-action">
+
+                    <span>📁</span>
+
+                    <strong>
+                        IMPORT FOLDER
+                    </strong>
+
+                    <small>
+                        Add many songs at once
+                    </small>
+
+                </button>
+
+
+                <button id="playAllButton"
+                        class="big-action">
+
+                    <span>▶️</span>
+
+                    <strong>
+                        PLAY ALL
+                    </strong>
+
+                    <small>
+                        Start automatic playback
+                    </small>
+
+                </button>
+
+            </div>
+
+
+            <div class="section-title">
+                RECENTLY PLAYED
+            </div>
+
+
+            <div id="recentList"
+                 class="song-list">
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             LIBRARY
+        ====================================== -->
+
+        <section id="libraryPage"
+                 class="page">
+
+
+            <div class="page-header">
+
+                <h2>
+                    Music Library
+                </h2>
+
+
+                <button id="libraryImportButton"
+                        class="small-blue-btn">
+
+                    + Import
+
+                </button>
+
+            </div>
+
+
+            <input id="searchInput"
+                   class="search"
+                   type="search"
+                   placeholder="Search songs, artists, directors...">
+
+
+            <div id="libraryList"
+                 class="song-list">
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             DIRECTORS
+        ====================================== -->
+
+        <section id="directorsPage"
+                 class="page">
+
+
+            <div class="page-header">
+
+                <h2>
+                    Music Directors
+                </h2>
+
+            </div>
+
+
+            <div id="directorList"
+                 class="director-list">
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             FAVORITES
+        ====================================== -->
+
+        <section id="favoritesPage"
+                 class="page">
+
+
+            <div class="page-header">
+
+                <h2>
+                    Favorites
+                </h2>
+
+            </div>
+
+
+            <div id="favoriteList"
+                 class="song-list">
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             PLAYLISTS
+        ====================================== -->
+
+        <section id="playlistsPage"
+                 class="page">
+
+
+            <div class="page-header">
+
+                <h2>
+                    Playlists
+                </h2>
+
+
+                <button id="createPlaylistButton"
+                        class="small-blue-btn">
+
+                    + New
+
+                </button>
+
+            </div>
+
+
+            <div id="playlistList"
+                 class="playlist-list">
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================
+         PLAYER
+    ========================================== -->
+
+    <section id="playerPanel"
+             class="player-panel">
+
+
+        <div class="player-art">
+
+            <div class="music-disc">
+                ♪
+            </div>
+
+        </div>
+
+
+        <div class="now-playing">
+
+
+            <div id="playerTitle"
+                 class="player-title">
+
+                Nothing playing
+
+            </div>
+
+
+            <div id="playerDirector"
+                 class="player-director">
+
+                Rishi Music
+
+            </div>
+
+        </div>
+
+
+        <input id="progressBar"
+               class="progress"
+               type="range"
+               min="0"
+               max="100"
+               value="0"
+               step="0.1">
+
+
+        <div class="time-row">
+
+            <span id="currentTime">
+                0:00
+            </span>
+
+            <span id="durationTime">
+                0:00
+            </span>
+
+        </div>
+
+
+        <div class="player-controls">
+
+
+            <button id="shuffleButton"
+                    class="control-btn">
+
+                🔀
+
+            </button>
+
+
+            <button id="previousButton"
+                    class="control-btn">
+
+                ⏮
+
+            </button>
+
+
+            <button id="mainPlayButton"
+                    class="play-button">
+
+                ▶
+
+            </button>
+
+
+            <button id="nextButton"
+                    class="control-btn">
+
+                ⏭
+
+            </button>
+
+
+            <button id="repeatButton"
+                    class="control-btn">
+
+                🔁
+
+            </button>
+
+        </div>
+
+
+        <div class="player-extra">
+
+
+            <button id="favoriteButton"
+                    class="extra-btn">
+
+                ♡ Favorite
+
+            </button>
+
+
+            <button id="playlistAddButton"
+                    class="extra-btn">
+
+                + Playlist
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         IMPORT INPUT
+    ========================================== -->
+
+    <input id="audioFileInput"
+           type="file"
+           accept="audio/*,.mp3,.m4a,.aac,.wav,.ogg,.flac"
+           multiple
+           hidden>
+
+
+    <input id="folderInput"
+           type="file"
+           accept="audio/*,.mp3,.m4a,.aac,.wav,.ogg,.flac"
+           multiple
+           webkitdirectory
+           directory
+           hidden>
+
+
+
+    <!-- =========================================
+         MODAL
+    ========================================== -->
+
+    <div id="modal"
+         class="modal hidden">
+
+
+        <div class="modal-box">
+
+
+            <h3 id="modalTitle">
+                Rishi Music
+            </h3>
+
+
+            <div id="modalContent">
+            </div>
+
+
+            <div class="modal-buttons">
+
+
+                <button id="modalCancel"
+                        class="modal-btn cancel">
+
+                    Cancel
+
+                </button>
+
+
+                <button id="modalConfirm"
+                        class="modal-btn confirm">
+
+                    OK
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         TOAST
+    ========================================== -->
+
+    <div id="toast"
+         class="toast">
+    </div>
+
+
+
+    <!-- =========================================
+         MAIN JAVASCRIPT
+    ========================================== -->
+
+    <script src="./app.js"></script>
+
+
+
+    <!-- =========================================
+         SERVICE WORKER REGISTRATION
+    ========================================== -->
+
+    <script>
+
+        if ("serviceWorker" in navigator) {
+
+            window.addEventListener("load", function () {
+
+                navigator.serviceWorker.register("./sw.js", {
+                    scope: "./"
+                })
+                .then(function (registration) {
+
+                    console.log(
+                        "Rishi Music service worker registered:",
+                        registration.scope
+                    );
+
+                })
+                .catch(function (error) {
+
+                    console.error(
+                        "Rishi Music service worker registration failed:",
+                        error
+                    );
+
+                });
+
+            });
+
+        }
+
+    </script>
+
+
+</div>
+
+</body>
+
+</html>
